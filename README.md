@@ -9,4 +9,5 @@ $ pip install poetry invoke  # if you don't install poetry and invoke
 $ poetry install
 $ inv run-window-viewer
 $ inv run-filter-designer
+$ inv run-room-designer
 ```
