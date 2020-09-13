@@ -41,7 +41,7 @@ if __name__ == '__main__':
             room_size = [x, y]
             room = pra.ShoeBox(room_size, fs=room_fs, absorption=absorption, max_order=max_order)
     elif room_type == "from corners":
-        pass
+        st.write("Not implemented")
 
     st.sidebar.markdown("""## Source""")
     src_num = st.sidebar.number_input("#source", min_value=0, value=0)
@@ -90,6 +90,10 @@ if __name__ == '__main__':
     """# room designer"""
     st.write(f"room fs: {room.fs}, source fs: {src_fs}")
     fig, ax = room.plot()
+    ax.set_xlim([0, room_size[0]])
+    ax.set_ylim([0, room_size[1]])
+    if room_dim=="3D":
+        ax.set_zlim([0, room_size[2]])
     st.pyplot(fig)
 
     ret = st.button("Simulate")
