@@ -2,7 +2,17 @@
 
 This repository will contain streamlit sample app for digital signal processing.
 
-## how to use
+## how to run
+
+You can run streamlit apps on your local machine from github repository directly.
+
+```sh
+$ streamlit run https://raw.githubusercontent.com/wrist/streamlit-dsp/master/streamlit_dsp/window_viewer.py
+$ streamlit run https://raw.githubusercontent.com/wrist/streamlit-dsp/master/streamlit_dsp/filter_designer.py
+$ streamlit run https://raw.githubusercontent.com/wrist/streamlit-dsp/master/streamlit_dsp/room_designer.py
+```
+
+## how to develop
 
 ### preparation
 
