@@ -1,2 +1,3 @@
 .venv
 streamlit_dsp.egg-info
+__pycache__
