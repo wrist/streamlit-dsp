@@ -11,3 +11,7 @@ def run_filter_designer(c):
 @task
 def run_room_designer(c):
     c.run("poetry run streamlit run streamlit_dsp/room_designer.py")
+
+@task
+def run(c):
+    c.run("poetry run streamlit run streamlit_dsp/app.py")

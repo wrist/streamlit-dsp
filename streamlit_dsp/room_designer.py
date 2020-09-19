@@ -16,7 +16,7 @@ import pyroomacoustics as pra
 import soundfile as sf
 
 
-if __name__ == '__main__':
+def main():
     st.sidebar.markdown("""
     ## Room shape
     """)
@@ -111,3 +111,5 @@ if __name__ == '__main__':
             sf.write(fp.name, room.mic_array.signals[i], src_fs, format="wav")
             st.audio(fp.name)
 
+if __name__ == '__main__':
+    main()

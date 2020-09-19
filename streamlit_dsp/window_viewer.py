@@ -9,7 +9,7 @@ import scipy.fftpack as fft
 import pandas as pd
 #import soundifle as sf
 
-if __name__ == '__main__':
+def main():
     """
     # window viewer
     """
@@ -57,3 +57,6 @@ if __name__ == '__main__':
     st.line_chart(df)
 
     print(win_name, win.shape, W.shape)
+
+if __name__ == '__main__':
+    main()

@@ -13,7 +13,7 @@ import scipy.fft as fft
 import pandas as pd
 import soundfile as sf
 
-if __name__ == '__main__':
+def main():
     """
     # filter designer
     """
@@ -144,3 +144,6 @@ if __name__ == '__main__':
             sf.write(fp.name, ys, wav_fs, format="wav")
             st.audio(fp.name)
             #st.line_chart(ys)
+
+if __name__ == '__main__':
+    main()
