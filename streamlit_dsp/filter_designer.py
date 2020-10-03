@@ -31,7 +31,7 @@ def main():
     num_taps = None
     if ft == "FIR":
         design_method = st.sidebar.selectbox("filter design method", ["firwin", "firwin2", "firls"])
-        num_taps = st.sidebar.number_input("#tap", min_value=1, max_value=192000, value=1)
+        num_taps = st.sidebar.number_input("#tap", min_value=1, max_value=192000, value=128)
         filter_shape = st.sidebar.selectbox("filter shape", ["lowpass", "highpass", "bandpass", "bandstop"])
 
         cutoff_hz = None
