@@ -5,11 +5,16 @@ description = ""
 authors = ["wrist <stoicheia1986@gmail.com>"]
 
 [tool.poetry.dependencies]
-python = "^3.6"
+python = "~3.6"
 streamlit = "^0.66.0"
 soundfile = "^0.10.3"
 pyroomacoustics = "^0.4.1"
-matplotlib = "^3.3.1"
+matplotlib = "^3.1.0"
+wheel = "^0.35.1"
+espnet-model-zoo = "^0.0.0-alpha.16"
+espnet = "^0.9.3"
+torch = "~1.4"
+pyyaml = "^5.3.1"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
