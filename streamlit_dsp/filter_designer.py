@@ -13,6 +13,8 @@ import scipy.fft as fft
 import pandas as pd
 import soundfile as sf
 
+import ast_util
+
 def main():
     """
     # filter designer
@@ -35,6 +37,8 @@ def main():
         filter_shape = st.sidebar.selectbox("filter shape", ["lowpass", "highpass", "bandpass", "bandstop"])
 
         cutoff_hz = None
+        cutoff_hz_begin = None
+        cutoff_hz_end = None
         if filter_shape == "bandpass":
             cutoff_hz_begin = st.sidebar.number_input("cutoff begin [Hz]", min_value=0.0, max_value=fs/2.0, value=100.0)
             cutoff_hz_end   = st.sidebar.number_input("cutoff end   [Hz]", min_value=0.0, max_value=fs/2.0, value=200.0)
@@ -144,6 +148,31 @@ def main():
             sf.write(fp.name, ys, wav_fs, format="wav")
             st.audio(fp.name)
             #st.line_chart(ys)
+
+    ret = st.button("generate code")
+    if ret:
+        fname = __file__
+        src = ast_util.transform_file(
+                fname,
+                {"ft": ft,
+                 "fs": fs,
+                 "design_method": design_method,
+                 "num_taps": num_taps,
+                 "filter_shape": filter_shape,
+                 "cutoff_hz_begin": cutoff_hz_begin,
+                 "cutoff_hz_end": cutoff_hz_end,
+                 "cutoff_hz": cutoff_hz,
+                 "coeff_type": coeff_type,
+                 "show_time_coeff": True,
+                 "show_freq_resp": True,
+                 "show_phase_resp": True,
+                 "show_group_delay": True,
+                 })
+
+        st.write("""```python
+{0}
+```""".format(src))
+
 
 if __name__ == '__main__':
     main()

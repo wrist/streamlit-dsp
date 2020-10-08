@@ -9,30 +9,30 @@ class StreamlitTransformer(ast.NodeTransformer):
     def __init__(self, assign_dict):
         self.assign_dict = assign_dict
         super().__init__()
-        
+
     def visit_Assign(self, node):
         if isinstance(node.targets[0], ast.Name):
             lhs_name = node.targets[0].id
             if lhs_name in self.assign_dict.keys():
                 #pp(ast.dump(node))
-                
+
                 value = self.assign_dict[lhs_name]
-                
+
                 name_node = ast.Name(id=lhs_name, ctx=ast.Store())
                 const_node = ast.Constant(value=value, kind=None)
-                
+
                 new_node = ast.Assign(targets=[name_node], value=const_node)
-                
+
                 return ast.copy_location(new_node, node)
         return node
-    
-    
+
+
     def visit_Expr(self, node):
         to_print_attrs = ["write", "dataframe", "line_chart"]
         to_remove_attrs = ["audio"]
-        
+
         if isinstance(node.value, ast.Call) and isinstance(node.value.func, ast.Attribute):
-            if node.value.func.value.id == "st":
+            if isinstance(node.value.func.value, ast.Name) and node.value.func.value.id == "st":
                 if node.value.func.attr in to_print_attrs:
                     print_name = ast.Name(id='print', ctx=ast.Load())
                     new_node = ast.Expr(ast.Call(func=print_name,
@@ -45,37 +45,44 @@ class StreamlitTransformer(ast.NodeTransformer):
         return node
 
 
-if __name__ == "__main__":
+def transform_file(fname, assign_dict):
     src = None
-    fname = "filter_designer.py"
+    fname = fname
     with open(fname) as fp:
         src = fp.read()
-    
+
     tree = ast.parse(src, fname)
     #pp(ast.dump(tree))
-    
-    transformer = StreamlitTransformer(
-        {"ft": "FIR",
-         "fs": 48000,
-         "design_method": "firwin",
-         "num_taps": 128,
-         "filter_shape": "lowpass",
-         "cutoff_hz_begin": 100.0,
-         "cutoff_hz_end": 200.0,
-         "cutoff_hz": 100.0,
-         "coeff_type": "ba",
-         "show_time_coeff": True,
-         "show_freq_resp": True,
-         "show_phase_resp": True,
-         "show_group_delay": True,
-        })
+
+    transformer = StreamlitTransformer(assign_dict)
     trans_tree = transformer.visit(tree)
-    
-    print("======= transformed =======")
     #pp(ast.dump(trans_tree))
-    #pp(astor.to_source(trans_tree))
-    print(astor.to_source(trans_tree))
-    
+
+    return astor.to_source(trans_tree)
+
+
+if __name__ == "__main__":
+    fname = "filter_designer.py"
+    src = transform_file(
+            fname,
+            {"ft": "FIR",
+             "fs": 48000,
+             "design_method": "firwin",
+             "num_taps": 128,
+             "filter_shape": "lowpass",
+             "cutoff_hz_begin": 100.0,
+             "cutoff_hz_end": 200.0,
+             "cutoff_hz": 100.0,
+             "coeff_type": "ba",
+             "show_time_coeff": True,
+             "show_freq_resp": True,
+             "show_phase_resp": True,
+             "show_group_delay": True,
+            })
+
+    print("======= transformed =======")
+    print(src)
+
     ## [rewrite Assign]
     #
     # ft = st.sidebar.selectbox("Filter type", ["FIR", "IIR"])
