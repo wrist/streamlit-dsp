@@ -15,6 +15,8 @@ import pandas as pd
 import pyroomacoustics as pra
 import soundfile as sf
 
+import ast_util
+
 
 def main():
     st.sidebar.markdown("""
@@ -110,6 +112,28 @@ def main():
             fp = tempfile.NamedTemporaryFile()
             sf.write(fp.name, room.mic_array.signals[i], src_fs, format="wav")
             st.audio(fp.name)
+
+    ret = st.button("generate code")
+    if ret:
+        fname = __file__
+        src = ast_util.transform_file(
+                fname,
+                {
+                    "room_type": room_type,
+                    "room_dim": room_dim,
+                    "room_fs": room_fs,
+                    "max_order": max_order,
+                    "absorption": absorption,
+                    "mic_num": mic_num,
+                    "src_num": src_num,
+                    "x": x,
+                    "y": y,
+                    "z": z
+                 })
+
+        st.write("""```python
+{0}
+```""".format(src))
 
 if __name__ == '__main__':
     main()
