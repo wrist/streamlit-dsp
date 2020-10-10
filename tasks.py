@@ -23,3 +23,9 @@ def push_to_heroku(c):
 @task
 def generate_requirements(c):
     c.run("poetry export -f requirements.txt --output requirements.txt")
+
+@task
+def set_heroku_buildpack(c):
+    c.run("heroku buildpacks:clear")
+    c.run("heroku buildpacks:add heroku-community/apt")
+    c.run("heroku buildpacks:add heroku/python")
