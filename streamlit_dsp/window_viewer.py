@@ -9,6 +9,8 @@ import scipy.fftpack as fft
 import pandas as pd
 #import soundifle as sf
 
+import altair as alt
+
 def main():
     """
     # window viewer
@@ -40,6 +42,9 @@ def main():
 
     f = (fs / nfft) * np.arange(-nfft/2, nfft/2)
 
+    # ==================================================
+    # using matplotlib
+    # ==================================================
     #fig, axes = plt.subplots(2, 1)
 
     #axes[0].plot(win)
@@ -51,12 +56,36 @@ def main():
 
     #st.pyplot(fig)
 
-    df = pd.DataFrame(data=fft.fftshift(W_power), index=f)
+    # ==================================================
+    # using st.line_chart
+    # ==================================================
+    #st.line_chart(win)
 
-    st.line_chart(win)
-    st.line_chart(df)
+    #df = pd.DataFrame(data=fft.fftshift(W_power), index=f)
+    #st.line_chart(df)
 
-    print(win_name, win.shape, W.shape)
+    # ==================================================
+    # using st.altair_chart
+    # ==================================================
+    df = pd.DataFrame({"x": np.arange(Nx), "y": win})
+    c = alt.Chart(df).mark_line().encode(
+            alt.X("x", title="coeff index"),
+            alt.Y("y", title="amplitude"),
+            tooltip=["x", "y"]
+            ).interactive()
+    st.altair_chart(c, use_container_width=True)
+
+    df = pd.DataFrame({"x": f, "y": fft.fftshift(W_power)})
+
+    c = alt.Chart(df).mark_line().encode(
+            alt.X("x", title="frequency [Hz]"),
+            alt.Y("y", title="power [dB]", scale=alt.Scale(domain=[-140, 10])),
+            tooltip=["x", "y"]
+            ).interactive()
+    st.altair_chart(c, use_container_width=True)
+
+
+    st.write("{0}, win.shape: {1}, W.shape: {2}".format(win_name, win.shape, W.shape))
 
 if __name__ == '__main__':
     main()
