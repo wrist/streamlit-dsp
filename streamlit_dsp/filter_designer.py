@@ -16,10 +16,6 @@ import soundfile as sf
 import ast_util
 
 def main():
-    """
-    # filter designer
-    """
-
     # ==================================================
     # sidebar
     # ==================================================
@@ -64,6 +60,7 @@ def main():
     # ==================================================
     # body
     # ==================================================
+    st.write("# filter designer")
 
     show_time_coeff = st.checkbox("time coefficient", value=True)
     show_freq_resp = st.checkbox("frequency response", value=True)
