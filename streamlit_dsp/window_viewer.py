@@ -11,6 +11,7 @@ import pandas as pd
 
 import altair as alt
 
+import ast_util
 
 def kaiser_beta(sl_dB):
     try:
@@ -22,6 +23,50 @@ def kaiser_beta(sl_dB):
             return 0.5842 * ((sl_dB - 21.0) ** 0.4) + 0.07886 * (sl_dB - 21.0)
         else:
             return 0.0
+
+
+def st_get_win_arg(win_name):
+    win_arg = None
+    if win_name == "kaiser":
+        st.sidebar.write("## kaiser window option")
+        sl_dB = st.sidebar.number_input("sidelobe attenuation [dB]", value=30.0, min_value=0.0)
+        beta = kaiser_beta(sl_dB)
+        st.sidebar.write("beta = {0}".format(beta))
+        win_arg = (win_name, beta)
+    elif win_name == "gaussian":
+        st.sidebar.write("## gaussian window option")
+        std_dev = st.sidebar.number_input("standard deviation", value=1.0, min_value=0.0)
+        win_arg = (win_name, std_dev)
+    elif win_name == "general_gaussian":
+        st.sidebar.write("## general gaussian window option")
+        power = st.sidebar.number_input("power", value=1.0)
+        std_dev = st.sidebar.number_input("standard deviation", value=1.0, min_value=0.0)
+        win_arg = (win_name, power, std_dev)
+    elif win_name == "slepian":
+        st.sidebar.write("## slepian window option")
+        band_width = st.sidebar.number_input("band width", value=0.5)
+        win_arg = (win_name, band_width)
+    elif win_name == "dpss":
+        st.sidebar.write("## dpss window option")
+        raise NotImplementedError
+    elif win_name == "chebwin":
+        st.sidebar.write("## chebwin window option")
+        attenuation = st.sidebar.number_input("attenuation [dB]", value=60.0, min_value=0.0)
+        win_arg = (win_name, attenuation)
+    elif win_name == "exponential":
+        st.sidebar.write("## exponential window option")
+        use_center = st.sidebar.checkbox("Use center", False)
+        center = st.sidebar.number_input("center", value=Nx/2, min_value=0.0) if use_center else None
+        tau = st.sidebar.number_input("tau", value=1.0, min_value=0.0)
+        win_arg = (win_name, center, tau)
+    elif win_name == "tukey":
+        st.sidebar.write("## tukey window option")
+        alpha = st.sidebar.number_input("alpha", value=0.5, min_value=0.0)
+        win_arg = (win_name, alpha)
+    else:
+        win_arg = win_name
+
+    return win_arg
 
 
 def main():
@@ -39,50 +84,11 @@ def main():
     eps = 1.e-16
     f = (fs / nfft) * np.arange(-nfft/2, nfft/2)
 
+    win_args = [st_get_win_arg(win_name) for win_name in win_names]
+
     win_ary = []
     W_power_ary = []
-
-    for win_name in win_names:
-        win_arg = None
-        if win_name == "kaiser":
-            st.sidebar.write("## kaiser window option")
-            sl_dB = st.sidebar.number_input("sidelobe attenuation [dB]", value=30.0, min_value=0.0)
-            beta = kaiser_beta(sl_dB)
-            st.sidebar.write("beta = {0}".format(beta))
-            win_arg = (win_name, beta)
-        elif win_name == "gaussian":
-            st.sidebar.write("## gaussian window option")
-            std_dev = st.sidebar.number_input("standard deviation", value=1.0, min_value=0.0)
-            win_arg = (win_name, std_dev)
-        elif win_name == "general_gaussian":
-            st.sidebar.write("## general gaussian window option")
-            power = st.sidebar.number_input("power", value=1.0)
-            std_dev = st.sidebar.number_input("standard deviation", value=1.0, min_value=0.0)
-            win_arg = (win_name, power, std_dev)
-        elif win_name == "slepian":
-            st.sidebar.write("## slepian window option")
-            band_width = st.sidebar.number_input("band width", value=0.5)
-            win_arg = (win_name, band_width)
-        elif win_name == "dpss":
-            st.sidebar.write("## dpss window option")
-            raise NotImplementedError
-        elif win_name == "chebwin":
-            st.sidebar.write("## chebwin window option")
-            attenuation = st.sidebar.number_input("attenuation [dB]", value=60.0, min_value=0.0)
-            win_arg = (win_name, attenuation)
-        elif win_name == "exponential":
-            st.sidebar.write("## exponential window option")
-            use_center = st.sidebar.checkbox("Use center", False)
-            center = st.sidebar.number_input("center", value=Nx/2, min_value=0.0) if use_center else None
-            tau = st.sidebar.number_input("tau", value=1.0, min_value=0.0)
-            win_arg = (win_name, center, tau)
-        elif win_name == "tukey":
-            st.sidebar.write("## tukey window option")
-            alpha = st.sidebar.number_input("alpha", value=0.5, min_value=0.0)
-            win_arg = (win_name, alpha)
-        else:
-            win_arg = win_name
-
+    for win_name, win_arg in zip(win_names, win_args):
         win = sg.get_window(win_arg, Nx)
 
         W = fft.fft(win, nfft)
@@ -160,6 +166,25 @@ def main():
     st.write(df_freq)
     st.write("df_freq_melt")
     st.write(df_freq_melt)
+
+    # ==================================================
+    # code generation
+    # ==================================================
+    ret = st.button("generate code")
+    if ret:
+        fname = __file__
+        src = ast_util.transform_file(
+                fname,
+                {"win_names": win_names,
+                 "fs": fs,
+                 "Nx": Nx,
+                 "nfft": nfft,
+                 "win_args": win_args,
+                 })
+
+        st.write("""```python
+{0}
+```""".format(src))
 
 
 if __name__ == '__main__':
