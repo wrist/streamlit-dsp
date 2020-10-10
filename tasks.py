@@ -15,3 +15,11 @@ def run_room_designer(c):
 @task
 def run(c):
     c.run("poetry run streamlit run streamlit_dsp/app.py")
+
+@task
+def push_to_heroku(c):
+    c.run("git push heroku heroku:main")
+
+@task
+def generate_requirements(c):
+    c.run("poetry export -f requirements.txt --output requirements.txt")
