@@ -1,3 +1,4 @@
-.venv
+.venv*
 streamlit_dsp.egg-info
 __pycache__
+.ipynb_checkpoints

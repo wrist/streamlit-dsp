@@ -15,11 +15,12 @@ import pandas as pd
 import pyroomacoustics as pra
 import soundfile as sf
 
+import ast_util
+
 
 def main():
-    st.sidebar.markdown("""
-    ## Room shape
-    """)
+    """## Room shape"""
+
     room_type = st.sidebar.selectbox("Choose room type", ["ShoeBox", "from corners"])
     room_dim = st.sidebar.selectbox("Room dimention", ["2D", "3D"])
 
@@ -31,19 +32,19 @@ def main():
     room = None
     room_size = None
     if room_type == "ShoeBox":
-        x = st.sidebar.slider("x", min_value=0.0, max_value=100.0)
-        y = st.sidebar.slider("y", min_value=0.0, max_value=100.0)
+        rx = st.sidebar.slider("x", min_value=0.0, max_value=100.0)
+        ry = st.sidebar.slider("y", min_value=0.0, max_value=100.0)
         if room_dim == "3D":
-            z = st.sidebar.slider("z", min_value=0.0, max_value=100.0)
-            room_size = [x, y, z]
+            rz = st.sidebar.slider("z", min_value=0.0, max_value=100.0)
+            room_size = [rx, ry, rz]
             room = pra.ShoeBox(room_size, fs=room_fs, absorption=absorption, max_order=max_order)
         else:
-            room_size = [x, y]
+            room_size = [rx, ry]
             room = pra.ShoeBox(room_size, fs=room_fs, absorption=absorption, max_order=max_order)
     elif room_type == "from corners":
         st.write("Not implemented")
 
-    st.sidebar.markdown("""## Source""")
+    """## Source"""
     src_num = st.sidebar.number_input("#source", min_value=0, value=0)
     src_fs = None
     wav_ary = []
@@ -58,31 +59,33 @@ def main():
                     st.write("room fs is different from source fs")
                 wav_ary.append(sig)
                 wav_name_ary.append(wav)
-            x = st.sidebar.slider("x", min_value=0.0, max_value=room_size[0], key=f"src{i}_x")
-            y = st.sidebar.slider("y", min_value=0.0, max_value=room_size[1], key=f"src{i}_y")
+
+            sx = st.sidebar.slider("x", min_value=0.0, max_value=room_size[0], key=f"src{i}_x")
+            sy = st.sidebar.slider("y", min_value=0.0, max_value=room_size[1], key=f"src{i}_y")
+
             if room_dim == "3D":
-                z = st.sidebar.slider("z", min_value=0.0, max_value=room_size[2], key=f"src{i}_z")
-                src_loc_ary.append([x, y, z])
+                sz = st.sidebar.slider("z", min_value=0.0, max_value=room_size[2], key=f"src{i}_z")
+                src_loc_ary.append([sx, sy, sz])
             else:
-                src_loc_ary.append([x, y])
+                src_loc_ary.append([sx, sy])
 
         if len(wav_ary) > 0:
             R = np.array(src_loc_ary).T
             room.add_source(R, signal=wav_ary[0])
 
-    st.sidebar.markdown("""## Microphone""")
+    """## Microphone"""
     mic_num = st.sidebar.number_input("#mic", min_value=0, value=0)
     if mic_num > 0:
         mic_loc_ary = []
         for i in range(mic_num):
             st.sidebar.write(f"mic {i}")
-            x = st.sidebar.slider("x", min_value=0.0, max_value=room_size[0], key=f"mic{i}_x")
-            y = st.sidebar.slider("y", min_value=0.0, max_value=room_size[1], key=f"mic{i}_y")
+            mx = st.sidebar.slider("x", min_value=0.0, max_value=room_size[0], key=f"mic{i}_x")
+            my = st.sidebar.slider("y", min_value=0.0, max_value=room_size[1], key=f"mic{i}_y")
             if room_dim == "3D":
-                z = st.sidebar.slider("z", min_value=0.0, max_value=room_size[2], key=f"mic{i}_z")
-                mic_loc_ary.append([x, y, z])
+                mz = st.sidebar.slider("z", min_value=0.0, max_value=room_size[2], key=f"mic{i}_z")
+                mic_loc_ary.append([mx, my, mz])
             else:
-                mic_loc_ary.append([x, y])
+                mic_loc_ary.append([mx, my])
 
         R = np.array(mic_loc_ary).T
         room.add_microphone_array(pra.MicrophoneArray(R, fs=room_fs))
@@ -110,6 +113,37 @@ def main():
             fp = tempfile.NamedTemporaryFile()
             sf.write(fp.name, room.mic_array.signals[i], src_fs, format="wav")
             st.audio(fp.name)
+
+    ret = st.button("generate code")
+    if ret:
+        fname = __file__
+        src = ast_util.transform_file(
+                fname,
+                {
+                    "room_type": room_type,
+                    "room_dim": room_dim,
+                    "room_fs": room_fs,
+                    "max_order": max_order,
+                    "absorption": absorption,
+                    "mic_num": mic_num,
+                    "src_num": src_num,
+                    "rx": rx,
+                    "ry": ry,
+                    "rz": rz,
+                    "mic_loc_ary": mic_loc_ary,
+                    "src_loc_ary": src_loc_ary,
+                    # TODO: replace as symbol
+                    "mx": "mic_loc_ary[i][0]",
+                    "my": "mic_loc_ary[i][1]",
+                    "mz": "mic_loc_ary[i][2]",
+                    "sx": "src_loc_ary[i][0]",
+                    "sy": "src_loc_ary[i][1]",
+                    "sz": "src_loc_ary[i][2]",
+                 })
+
+        st.write("""```python
+{0}
+```""".format(src))
 
 if __name__ == '__main__':
     main()
