@@ -14,6 +14,7 @@ import pandas as pd
 import soundfile as sf
 
 import ast_util
+import st_util
 
 def main():
     # ==================================================
@@ -94,19 +95,16 @@ def main():
 
 
         if show_time_coeff:
-            st.line_chart(b)
+            st_util.st_my_line_chart(np.arange(len(b)), b, ["b"], "coeff index [pt]", "amplitude")
 
         if show_freq_resp:
-            df_h = pd.DataFrame(h_power, index=f)
-            st.line_chart(df_h)
+            st_util.st_my_line_chart(f, h_power, ["h_power"], "frequency [Hz]", "power [dB]")
 
         if show_phase_resp:
-            df_phase = pd.DataFrame(phase, index=f)
-            st.line_chart(df_phase)
+            st_util.st_my_line_chart(f, phase, ["phase"], "frequency [Hz]", "phase angle [rad]")
 
         if show_group_delay:
-            df_gd = pd.DataFrame(gd, index=f)
-            st.line_chart(df_gd)
+            st_util.st_my_line_chart(f, gd, ["group delay"], "frequency [Hz]", "group delay [pt]")
 
         st.write(f"{ft} coefficient as {coeff_type}")
 
