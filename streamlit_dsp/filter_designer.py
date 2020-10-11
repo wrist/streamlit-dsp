@@ -16,6 +16,9 @@ import soundfile as sf
 import ast_util
 import st_util
 
+st.set_option('deprecation.showfileUploaderEncoding', False)
+
+
 def main():
     # ==================================================
     # sidebar
@@ -55,7 +58,8 @@ def main():
 
     coeff_type = st.sidebar.selectbox("Coefficient type", ["ba", "zpk", "sos"])
 
-    wav = st.sidebar.file_uploader("input wave file", type="wav", encoding=None)
+    #wav = st.sidebar.file_uploader("input wave file", type="wav", encoding=None)
+    wav_ary = st.sidebar.file_uploader("input wave file", type="wav", encoding=None, accept_multiple_files=True)
 
 
     # ==================================================
@@ -129,20 +133,58 @@ def main():
         elif coeff_type == "sos":
             raise NotImplementedError
 
-    if wav:
-        st.write("input wave file")
-        st.audio(wav)
-        if ft == "FIR":
-            sig, wav_fs = sf.read(wav)
-            #st.line_chart(sig)
+    # ==================================================
+    # processing for uploaded files
+    # ==================================================
 
-            ys = sg.lfilter(b, [1.0], sig)
+    st.write("# Processing for uploaded files")
 
-            st.write("filtered wave file")
-            fp = tempfile.NamedTemporaryFile()
-            sf.write(fp.name, ys, wav_fs, format="wav")
-            st.audio(fp.name)
-            #st.line_chart(ys)
+    show_wave_amp = st.checkbox("show waveform", value=False)
+    show_wave_freq = st.checkbox("show spectrogram", value=False)
+
+    if wav_ary is not None:
+        for i, wav in enumerate(wav_ary):
+            st.write(f"input wave file{i}")
+            st.audio(wav)
+            if ft == "FIR":
+                sig, wav_fs = sf.read(wav)
+
+                ys = sg.lfilter(b, [1.0], sig)
+
+                st.write(f"filtered wave file{i}")
+
+                # FIXME: pass original filename as prefix but we can't get the name still
+                # see: https://github.com/streamlit/streamlit/issues/896
+                fp = tempfile.NamedTemporaryFile()
+                sf.write(fp.name, ys, wav_fs, format="wav")
+                st.audio(fp.name)
+
+                href = st_util.get_binary_file_downloader_html(fp.name, "filtered wave file", ".wav")
+                st.markdown(href, unsafe_allow_html=True)
+
+                if show_wave_amp:
+                    st.line_chart(sig)
+                    st.line_chart(ys)
+
+                if show_wave_freq:
+                    f, t, Sxx = sg.spectrogram(sig, fs)
+                    f2, t2, Sxx2 = sg.spectrogram(ys, fs)
+
+                    fig, axes = plt.subplots(2,1)
+                    axes[0].pcolormesh(t, f, Sxx)
+                    axes[0].set_yscale("log")
+                    axes[0].set_ylim([100.0, fs/2])
+                    axes[0].set_ylabel("frequency [Hz]")
+                    axes[0].set_xlabel("time [s]")
+
+                    axes[1].pcolormesh(t2, f2, Sxx2)
+                    axes[1].set_yscale("log")
+                    axes[1].set_ylim([100.0, fs/2])
+                    axes[1].set_ylabel("frequency [Hz]")
+                    axes[1].set_xlabel("time [s]")
+
+                    st.pyplot(fig)
+
 
     ret = st.button("generate code")
     if ret:

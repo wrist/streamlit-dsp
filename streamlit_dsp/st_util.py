@@ -5,6 +5,8 @@ import altair as alt
 import numpy as np
 import pandas as pd
 
+import os
+import base64
 
 def st_my_line_chart(xs, ys, columns, xlabel, ylabel, xlim=None, ylim=None, category_name=None):
     df = pd.DataFrame(data=np.array(ys).T,
@@ -36,3 +38,12 @@ def st_my_line_chart(xs, ys, columns, xlabel, ylabel, xlim=None, ylim=None, cate
     st.altair_chart(c, use_container_width=True)
 
     return df, df_melt
+
+
+def get_binary_file_downloader_html(bin_file, file_label='File', extension=""):
+    with open(bin_file, 'rb') as f:
+        data = f.read()
+    bin_str = base64.b64encode(data).decode()
+    href = f'<a href="data:application/octet-stream;base64,{bin_str}" download="{os.path.basename(bin_file)}{extension}">Download {file_label}</a>'
+    return href
+
