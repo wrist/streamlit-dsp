@@ -945,7 +945,7 @@ numpy = ["numpy"]
 
 [[package]]
 name = "streamlit"
-version = "0.66.0"
+version = "0.68.0"
 description = "The fastest way to build data apps in Python"
 category = "main"
 optional = false
@@ -1121,7 +1121,7 @@ notebook = ">=4.4.1"
 [metadata]
 lock-version = "1.1"
 python-versions = "3.8.6"
-content-hash = "ed374a6b7bfa2eb3370fcda2a62517a906b7875024b7ffd997668d4ce4d4e5e2"
+content-hash = "548a60c35c8e3cc2a21a10d090230ab83de7f2d0b9fcf20f35d50ac2bb7c063e"
 
 [metadata.files]
 altair = [
@@ -1761,7 +1761,7 @@ soundfile = [
     {file = "SoundFile-0.10.3.post1.tar.gz", hash = "sha256:490cff42650733d1832728b937fe99fa1802896f5ef4d61bcf78cf7ebecb107b"},
 ]
 streamlit = [
-    {file = "streamlit-0.66.0-py2.py3-none-any.whl", hash = "sha256:383f16b6e84eebe9f99e1da5d3fae914874a44f797176b67ef7e34ad214fd005"},
+    {file = "streamlit-0.68.0-py2.py3-none-any.whl", hash = "sha256:c180c7f2e0fe4d29debd01c25999dc76b3336f5adc81f46614e6b0fccf95195c"},
 ]
 terminado = [
     {file = "terminado-0.9.1-py3-none-any.whl", hash = "sha256:c55f025beb06c2e2669f7ba5a04f47bb3304c30c05842d4981d8f0fc9ab3b4e3"},

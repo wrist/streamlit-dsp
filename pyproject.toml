@@ -6,7 +6,7 @@ authors = ["wrist <stoicheia1986@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = "3.8.6"
-streamlit = "^0.66.0"
+streamlit = "^0.68.0"
 soundfile = "^0.10.3"
 pyroomacoustics = "^0.4.1"
 matplotlib = "^3.3.1"

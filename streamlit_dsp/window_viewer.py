@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import streamlit as st
 
 import numpy as np
@@ -11,6 +13,7 @@ import pandas as pd
 
 import altair as alt
 
+import st_util
 import ast_util
 
 def kaiser_beta(sl_dB):
@@ -118,13 +121,13 @@ def main():
     # ==================================================
     # using st.line_chart
     # ==================================================
-    df_win = pd.DataFrame(np.array(win_ary).T,
-                          index=np.arange(Nx),
-                          columns=win_names)
+    #df_win = pd.DataFrame(np.array(win_ary).T,
+    #                      index=np.arange(Nx),
+    #                      columns=win_names)
 
-    df_freq = pd.DataFrame(data=np.array(W_power_ary).T,
-                           index=f,
-                           columns=win_names)
+    #df_freq = pd.DataFrame(data=np.array(W_power_ary).T,
+    #                       index=f,
+    #                       columns=win_names)
 
     #st.line_chart(df_win)
     #st.line_chart(df_freq)
@@ -134,24 +137,9 @@ def main():
     # see: https://github.com/streamlit/streamlit/issues/1129
     #      https://github.com/altair-viz/altair/issues/271
     # ==================================================
-    df_win_melt = df_win.reset_index().melt("index", var_name="windows", value_name="y")
-    c = alt.Chart(df_win_melt).mark_line().encode(
-            alt.X("index", title="coeff index"),
-            alt.Y("y", title="amplitude"),
-            tooltip=["index", "y"],
-            color='windows:N'
-            ).interactive()
-    st.altair_chart(c, use_container_width=True)
-
-    df_freq_melt = df_freq.reset_index().melt("index", var_name="windows_power", value_name="y")
-    c = alt.Chart(df_freq_melt).mark_line().encode(
-            alt.X("index", title="frequency [Hz]"),
-            alt.Y("y", title="power [dB]", scale=alt.Scale(domain=[-140, 10])),
-            tooltip=["index", "y"],
-            color='windows_power:N'
-            ).interactive()
-    st.altair_chart(c, use_container_width=True)
-
+    df_win, df_win_melt = st_util.st_my_line_chart(np.arange(Nx), win_ary, win_names, "coeff index", "amplitude", category_name="window")
+    df_freq, df_freq_melt = st_util.st_my_line_chart(f, W_power_ary, win_names, "frequency [Hz]", "power [dB]",
+                                                     xlim=None, ylim=[-140.0, 10.0], category_name="window")
 
     # ==================================================
     # show information

@@ -533,8 +533,8 @@ soundfile==0.10.3.post1 \
     --hash=sha256:4555438c2c4f02b39fea2ed40f6ddeda88a80cd1ee9dd129be4d5f5134698cc2 \
     --hash=sha256:b361d4ac1519a2e516cabafa6bf7e93492f999f35d7d25350cd87fdc3e5cb27e \
     --hash=sha256:490cff42650733d1832728b937fe99fa1802896f5ef4d61bcf78cf7ebecb107b
-streamlit==0.66.0 \
-    --hash=sha256:383f16b6e84eebe9f99e1da5d3fae914874a44f797176b67ef7e34ad214fd005
+streamlit==0.68.0 \
+    --hash=sha256:c180c7f2e0fe4d29debd01c25999dc76b3336f5adc81f46614e6b0fccf95195c
 terminado==0.9.1 \
     --hash=sha256:c55f025beb06c2e2669f7ba5a04f47bb3304c30c05842d4981d8f0fc9ab3b4e3 \
     --hash=sha256:3da72a155b807b01c9e8a5babd214e052a0a45a975751da3521a1c3381ce6d76
