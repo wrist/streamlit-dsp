@@ -163,8 +163,13 @@ def main():
                 st.markdown(href, unsafe_allow_html=True)
 
                 if show_wave_amp:
-                    st.line_chart(sig)
-                    st.line_chart(ys)
+                    t = np.arange(len(sig)) / wav_fs
+                    ymax = np.max(np.abs(sig))
+                    st_util.st_my_line_chart(t, sig, ["input"], "time [s]", "amplitude", ylim=[-ymax, ymax])
+
+                    t = np.arange(len(ys)) / wav_fs
+                    ymax = np.max(np.abs(ys))
+                    st_util.st_my_line_chart(t, ys, ["output"], "time [s]", "amplitude", ylim=[-ymax, ymax])
 
                 if show_wave_freq:
                     f, t, Sxx = sg.spectrogram(sig, fs)
