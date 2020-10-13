@@ -39,7 +39,7 @@ version = "1.4.4"
 [[package]]
 category = "main"
 description = "Disable App Nap on OS X 10.9"
-marker = "sys_platform == \"darwin\" or platform_system == \"Darwin\" or python_version >= \"3.3\" and sys_platform == \"darwin\" or python_version >= \"3.4\" and sys_platform == \"darwin\" or python_version >= \"3.4\" and platform_system == \"Darwin\""
+marker = "python_version >= \"3.4\" and sys_platform == \"darwin\" or python_version >= \"3.4\" and platform_system == \"Darwin\" or python_version >= \"3.3\" and sys_platform == \"darwin\""
 name = "appnope"
 optional = false
 python-versions = "*"
@@ -112,6 +112,7 @@ version = "2.1.8"
 [[package]]
 category = "main"
 description = "Specifications for callback functions passed in to an API"
+marker = "python_version >= \"3.3\""
 name = "backcall"
 optional = false
 python-versions = "*"
@@ -164,10 +165,10 @@ description = "The AWS SDK for Python"
 name = "boto3"
 optional = false
 python-versions = "*"
-version = "1.15.6"
+version = "1.15.16"
 
 [package.dependencies]
-botocore = ">=1.18.6,<1.19.0"
+botocore = ">=1.18.16,<1.19.0"
 jmespath = ">=0.7.1,<1.0.0"
 s3transfer = ">=0.3.0,<0.4.0"
 
@@ -177,7 +178,7 @@ description = "Low-level, data-driven core of boto 3."
 name = "botocore"
 optional = false
 python-versions = "*"
-version = "1.18.6"
+version = "1.18.16"
 
 [package.dependencies]
 jmespath = ">=0.7.1,<1.0.0"
@@ -247,7 +248,7 @@ version = "7.1.2"
 [[package]]
 category = "main"
 description = "Cross-platform colored terminal text."
-marker = "python_version >= \"3.3\" and sys_platform == \"win32\" or sys_platform == \"win32\" or python_version >= \"3.4\" and sys_platform == \"win32\""
+marker = "python_version >= \"3.4\" and sys_platform == \"win32\" or python_version >= \"3.3\" and sys_platform == \"win32\" or sys_platform == \"win32\""
 name = "colorama"
 optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
@@ -270,7 +271,7 @@ description = "CTC segmentation to align utterances within large audio files."
 name = "ctc-segmentation"
 optional = false
 python-versions = ">=3.6"
-version = "1.0.6"
+version = "1.1.0"
 
 [package.dependencies]
 Cython = "*"
@@ -358,7 +359,7 @@ description = "ESPnet: end-to-end speech processing toolkit"
 name = "espnet"
 optional = false
 python-versions = ">=3.6.0"
-version = "0.9.3"
+version = "0.9.4"
 
 [package.dependencies]
 PyYAML = ">=5.1.2"
@@ -370,10 +371,10 @@ espnet-model-zoo = "*"
 espnet-tts-frontend = "*"
 fastdtw = "*"
 gdown = "*"
-h5py = "2.9.0"
+h5py = ">=2.10.0"
 humanfriendly = "*"
 inflect = ">=1.0.0"
-kaldiio = ">=2.15.0"
+kaldiio = ">=2.17.0"
 librosa = ">=0.8.0"
 matplotlib = "3.1.0"
 mir-eval = ">=0.6"
@@ -400,7 +401,7 @@ unidecode = ">=1.0.22"
 
 [package.extras]
 doc = ["Sphinx (2.1.2)", "sphinx-rtd-theme (>=0.2.4)", "sphinx-argparse (>=0.2.5)", "commonmark (0.8.1)", "recommonmark (>=0.4.0)", "travis-sphinx (>=2.0.1)", "nbsphinx (>=0.4.2)", "sphinx-markdown-tables (>=0.0.12)"]
-test = ["pytest (>=3.3.0)", "pytest-pythonpath (>=0.7.3)", "pytest-cov (>=2.7.1)", "hacking (>=2.0.0)", "mock (>=2.0.0)", "pycodestyle", "jsondiff (>=1.2.0)", "flake8 (>=3.7.8)", "flake8-docstrings (>=1.3.1)", "black"]
+test = ["pytest (>=3.3.0)", "pytest-timeouts (>=1.2.1)", "pytest-pythonpath (>=0.7.3)", "pytest-cov (>=2.7.1)", "hacking (>=2.0.0)", "mock (>=2.0.0)", "pycodestyle", "jsondiff (>=1.2.0)", "flake8 (>=3.7.8)", "flake8-docstrings (>=1.3.1)", "black"]
 
 [[package]]
 category = "main"
@@ -499,7 +500,7 @@ description = "Google Authentication Library"
 name = "google-auth"
 optional = false
 python-versions = ">=2.7,!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*"
-version = "1.21.3"
+version = "1.22.1"
 
 [package.dependencies]
 cachetools = ">=2.0.0,<5.0"
@@ -510,6 +511,9 @@ six = ">=1.9.0"
 [package.dependencies.rsa]
 python = ">=3.5"
 version = ">=3.1.4,<5"
+
+[package.extras]
+aiohttp = ["aiohttp (>=3.6.2,<4.0.0dev)"]
 
 [[package]]
 category = "main"
@@ -546,7 +550,7 @@ description = "Read and write HDF5 files from Python"
 name = "h5py"
 optional = false
 python-versions = "*"
-version = "2.9.0"
+version = "2.10.0"
 
 [package.dependencies]
 numpy = ">=1.7"
@@ -625,6 +629,7 @@ test = ["pytest (!=5.3.4)", "pytest-cov", "flaky", "nose"]
 [[package]]
 category = "main"
 description = "IPython: Productive Interactive Computing"
+marker = "python_version >= \"3.3\""
 name = "ipython"
 optional = false
 python-versions = ">=3.6"
@@ -694,6 +699,7 @@ version = "0.2.4"
 [[package]]
 category = "main"
 description = "An autocompletion tool for Python that can be used for text editors."
+marker = "python_version >= \"3.3\""
 name = "jedi"
 optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
@@ -734,7 +740,7 @@ description = "Lightweight pipelining: using Python functions as pipeline jobs."
 name = "joblib"
 optional = false
 python-versions = ">=3.6"
-version = "0.16.0"
+version = "0.17.0"
 
 [[package]]
 category = "main"
@@ -794,7 +800,7 @@ description = "Pygments theme using JupyterLab CSS variables"
 name = "jupyterlab-pygments"
 optional = false
 python-versions = "*"
-version = "0.1.1"
+version = "0.1.2"
 
 [package.dependencies]
 pygments = ">=2.4.1,<3"
@@ -856,8 +862,8 @@ category = "main"
 description = "Python implementation of Markdown."
 name = "markdown"
 optional = false
-python-versions = ">=3.5"
-version = "3.2.2"
+python-versions = ">=3.6"
+version = "3.3"
 
 [package.dependencies]
 [package.dependencies.importlib-metadata]
@@ -1022,7 +1028,7 @@ description = "Converting Jupyter Notebooks"
 name = "nbconvert"
 optional = false
 python-versions = ">=3.6"
-version = "6.0.6"
+version = "6.0.7"
 
 [package.dependencies]
 bleach = "*"
@@ -1069,7 +1075,7 @@ description = "Patch asyncio to allow nested event loops"
 name = "nest-asyncio"
 optional = false
 python-versions = ">=3.5"
-version = "1.4.0"
+version = "1.4.1"
 
 [[package]]
 category = "main"
@@ -1235,7 +1241,7 @@ version = "0.1.2"
 [[package]]
 category = "main"
 description = "Pexpect allows easy control of interactive console applications."
-marker = "python_version >= \"3.3\" and sys_platform != \"win32\" or sys_platform != \"win32\" or python_version >= \"3.4\" and sys_platform != \"win32\""
+marker = "python_version >= \"3.4\" and sys_platform != \"win32\" or python_version >= \"3.3\" and sys_platform != \"win32\""
 name = "pexpect"
 optional = false
 python-versions = "*"
@@ -1247,6 +1253,7 @@ ptyprocess = ">=0.5"
 [[package]]
 category = "main"
 description = "Tiny 'shelve'-like database with concurrency support"
+marker = "python_version >= \"3.3\""
 name = "pickleshare"
 optional = false
 python-versions = "*"
@@ -1303,6 +1310,7 @@ twisted = ["twisted"]
 [[package]]
 category = "main"
 description = "Library for building powerful interactive command lines in Python"
+marker = "python_version >= \"3.3\""
 name = "prompt-toolkit"
 optional = false
 python-versions = ">=3.6"
@@ -1326,7 +1334,7 @@ six = ">=1.9"
 [[package]]
 category = "main"
 description = "Run a subprocess in a pseudo terminal"
-marker = "python_version >= \"3.3\" and sys_platform != \"win32\" or python_version >= \"3.4\" and sys_platform != \"win32\" or os_name != \"nt\" or python_version >= \"3.3\" and sys_platform != \"win32\" and (python_version >= \"3.3\" and sys_platform != \"win32\" or python_version >= \"3.4\" and sys_platform != \"win32\") or python_version >= \"3.4\" and sys_platform != \"win32\" and (python_version >= \"3.3\" and sys_platform != \"win32\" or python_version >= \"3.4\" and sys_platform != \"win32\")"
+marker = "python_version >= \"3.4\" and sys_platform != \"win32\" or os_name != \"nt\" or python_version >= \"3.3\" and sys_platform != \"win32\""
 name = "ptyprocess"
 optional = false
 python-versions = "*"
@@ -1440,7 +1448,7 @@ description = "汉字拼音转换模块/工具."
 name = "pypinyin"
 optional = false
 python-versions = ">=2.6, !=3.0.*, !=3.1.*, !=3.2.*, <4"
-version = "0.39.0"
+version = "0.39.1"
 
 [[package]]
 category = "main"
@@ -1615,7 +1623,7 @@ description = "Alternative regular expression module, to replace re."
 name = "regex"
 optional = false
 python-versions = "*"
-version = "2020.9.27"
+version = "2020.10.11"
 
 [[package]]
 category = "main"
@@ -1797,7 +1805,7 @@ description = "The fastest way to build data apps in Python"
 name = "streamlit"
 optional = false
 python-versions = ">=3.6"
-version = "0.66.0"
+version = "0.68.0"
 
 [package.dependencies]
 altair = ">=3.2.0"
@@ -1952,7 +1960,7 @@ description = "Fast, Extensible Progress Meter"
 name = "tqdm"
 optional = false
 python-versions = ">=2.6, !=3.0.*, !=3.1.*"
-version = "4.49.0"
+version = "4.50.2"
 
 [package.extras]
 dev = ["py-make (>=0.1.0)", "twine", "argopt", "pydoc-markdown"]
@@ -2103,14 +2111,14 @@ marker = "python_version < \"3.8\""
 name = "zipp"
 optional = false
 python-versions = ">=3.6"
-version = "3.2.0"
+version = "3.3.0"
 
 [package.extras]
 docs = ["sphinx", "jaraco.packaging (>=3.2)", "rst.linker (>=1.9)"]
 testing = ["pytest (>=3.5,<3.7.3 || >3.7.3)", "pytest-checkdocs (>=1.2.3)", "pytest-flake8", "pytest-cov", "jaraco.test (>=3.2.0)", "jaraco.itertools", "func-timeout", "pytest-black (>=0.3.7)", "pytest-mypy"]
 
 [metadata]
-content-hash = "44910282546fd11fcfeb8fbe8c61a13d0c0e52e5ee054d63be5e3de39b03c68f"
+content-hash = "ddac368bd5dd17e28552d1b89f092259dec0eacb8ab87d138d89a2d30964dc4b"
 lock-version = "1.0"
 python-versions = "~3.6"
 
@@ -2187,12 +2195,12 @@ blinker = [
     {file = "blinker-1.4.tar.gz", hash = "sha256:471aee25f3992bd325afa3772f1063dbdbbca947a041b8b89466dc00d606f8b6"},
 ]
 boto3 = [
-    {file = "boto3-1.15.6-py2.py3-none-any.whl", hash = "sha256:87534080a5addad135fcd631fa8b57a12e1a234c23d86521e84fbbd9217fd6a5"},
-    {file = "boto3-1.15.6.tar.gz", hash = "sha256:c4c84c6647e84a9f270d86da7eea1a250c2529e26ddb39320546f235327f10e6"},
+    {file = "boto3-1.15.16-py2.py3-none-any.whl", hash = "sha256:557320fe8b65cfc85953e6a63d2328e8efec95bf4ec383b92fa2d01119209716"},
+    {file = "boto3-1.15.16.tar.gz", hash = "sha256:454a8dfb7b367a058c7967ef6b4e2a192c318f10761769fd1003cf7f2f5a7db9"},
 ]
 botocore = [
-    {file = "botocore-1.18.6-py2.py3-none-any.whl", hash = "sha256:31f04b68a6ebe8cfa97b4d70f54f29aef8b6a0bc9c4da7b8ee9b6a53fc69edae"},
-    {file = "botocore-1.18.6.tar.gz", hash = "sha256:3de32a03679bb172a41c38e3c9af3f7259f3637f705aa2ac384b3233dc985b85"},
+    {file = "botocore-1.18.16-py2.py3-none-any.whl", hash = "sha256:e586e4d6eddbca31e6447a25df9972329ea3de64b1fb0eb17e7ab0c9b91f7720"},
+    {file = "botocore-1.18.16.tar.gz", hash = "sha256:f0616d2c719691b94470307cee8adf89ceb1657b7b6f9aa1bf61f9de5543dbbb"},
 ]
 bottleneck = [
     {file = "Bottleneck-1.3.2.tar.gz", hash = "sha256:20179f0b66359792ea283b69aa16366419132f3b6cf3adadc0c48e2e8118e573"},
@@ -2259,7 +2267,7 @@ configargparse = [
     {file = "ConfigArgParse-1.2.3.tar.gz", hash = "sha256:edd17be986d5c1ba2e307150b8e5f5107aba125f3574dddd02c85d5cdcfd37dc"},
 ]
 ctc-segmentation = [
-    {file = "ctc_segmentation-1.0.6.tar.gz", hash = "sha256:30f38e8f69545468d298625e599b8230ab0d7ae8df9397166d27f0f536edc836"},
+    {file = "ctc_segmentation-1.1.0.tar.gz", hash = "sha256:1630d1034e23caf822d5f0e15c59e4e7ed38cdc70e1467edd770aa363c4aba80"},
 ]
 cycler = [
     {file = "cycler-0.10.0-py2.py3-none-any.whl", hash = "sha256:1d8a5ae1ff6c5cf9b93e8811e581232ad8920aeec647c37316ceac982b08cb2d"},
@@ -2356,8 +2364,8 @@ enum-compat = [
     {file = "enum_compat-0.0.3-py3-none-any.whl", hash = "sha256:88091b617c7fc3bbbceae50db5958023c48dc40b50520005aa3bf27f8f7ea157"},
 ]
 espnet = [
-    {file = "espnet-0.9.3-py3-none-any.whl", hash = "sha256:35373612a4d1f59229c6988b6ba1db97ba7116c5a80301feef90e30c2b996ad7"},
-    {file = "espnet-0.9.3.tar.gz", hash = "sha256:1d5213d3573e42952f05ee9b37c03ed5c0653a8fb2544dd4ef3d90c5d07f7d16"},
+    {file = "espnet-0.9.4-py3-none-any.whl", hash = "sha256:58916d429cd8e11fabe64d5bddee1fa779ba60177149f405f264bd7d8f9754a2"},
+    {file = "espnet-0.9.4.tar.gz", hash = "sha256:3d22c3a553ffae11812941e21661563f18271ff811c3fb0321e4ffc8d791da3c"},
 ]
 espnet-model-zoo = [
     {file = "espnet_model_zoo-0.0.0a16-py3-none-any.whl", hash = "sha256:a648ca01dc2e0b77000d60816b53afd3530b5b6e3870cabb3830dc0d294581b5"},
@@ -2386,8 +2394,8 @@ gdown = [
     {file = "gdown-3.12.2.tar.gz", hash = "sha256:4b3a1301e57bfd8dce939bf25ef8fbb4b23967fd0f878eede328bdcc41386bac"},
 ]
 google-auth = [
-    {file = "google-auth-1.21.3.tar.gz", hash = "sha256:31941bf019fb242c04d0de32845da10180788bfddb0de87d78c4bdf55555dda1"},
-    {file = "google_auth-1.21.3-py2.py3-none-any.whl", hash = "sha256:873051a6317294b083795cffc467bcd05b6df483ef542bfe0069ddbfbac0a096"},
+    {file = "google-auth-1.22.1.tar.gz", hash = "sha256:9c0f71789438d703f77b94aad4ea545afaec9a65f10e6cc1bc8b89ce242244bb"},
+    {file = "google_auth-1.22.1-py2.py3-none-any.whl", hash = "sha256:712dd7d140a9a1ea218e5688c7fcb04af71b431a29ec9ce433e384c60e387b98"},
 ]
 google-auth-oauthlib = [
     {file = "google-auth-oauthlib-0.4.1.tar.gz", hash = "sha256:88d2cd115e3391eb85e1243ac6902e76e77c5fe438b7276b297fbe68015458dd"},
@@ -2435,35 +2443,35 @@ grpcio = [
     {file = "grpcio-1.32.0.tar.gz", hash = "sha256:01d3046fe980be25796d368f8fc5ff34b7cf5e1444f3789a017a7fe794465639"},
 ]
 h5py = [
-    {file = "h5py-2.9.0-cp27-cp27m-macosx_10_6_intel.macosx_10_9_intel.macosx_10_9_x86_64.macosx_10_10_intel.macosx_10_10_x86_64.whl", hash = "sha256:f3b49107fbfc77333fc2b1ef4d5de2abcd57e7ea3a1482455229494cf2da56ce"},
-    {file = "h5py-2.9.0-cp27-cp27m-manylinux1_i686.whl", hash = "sha256:0f94de7a10562b991967a66bbe6dda9808e18088676834c0a4dcec3fdd3bcc6f"},
-    {file = "h5py-2.9.0-cp27-cp27m-manylinux1_x86_64.whl", hash = "sha256:713ac19307e11de4d9833af0c4bd6778bde0a3d967cafd2f0f347223711c1e31"},
-    {file = "h5py-2.9.0-cp27-cp27m-win32.whl", hash = "sha256:4162953714a9212d373ac953c10e3329f1e830d3c7473f2a2e4f25dd6241eef0"},
-    {file = "h5py-2.9.0-cp27-cp27m-win_amd64.whl", hash = "sha256:407b5f911a83daa285bbf1ef78a9909ee5957f257d3524b8606be37e8643c5f0"},
-    {file = "h5py-2.9.0-cp27-cp27mu-manylinux1_i686.whl", hash = "sha256:30e365e8408759db3778c361f1e4e0fe8e98a875185ae46c795a85e9bafb9cdf"},
-    {file = "h5py-2.9.0-cp27-cp27mu-manylinux1_x86_64.whl", hash = "sha256:3206bac900e16eda81687d787086f4ffd4f3854980d798e191a9868a6510c3ae"},
-    {file = "h5py-2.9.0-cp34-cp34m-macosx_10_6_intel.macosx_10_9_intel.macosx_10_9_x86_64.macosx_10_10_intel.macosx_10_10_x86_64.whl", hash = "sha256:106e42e2e01e486a3d32eeb9ba0e3a7f65c12fa8998d63625fa41fb8bdc44cdb"},
-    {file = "h5py-2.9.0-cp34-cp34m-manylinux1_i686.whl", hash = "sha256:1606c66015f04719c41a9863c156fc0e6b992150de21c067444bcb82e7d75579"},
-    {file = "h5py-2.9.0-cp34-cp34m-manylinux1_x86_64.whl", hash = "sha256:e58a25764472af07b7e1c4b10b0179c8ea726446c7141076286e41891bf3a563"},
-    {file = "h5py-2.9.0-cp34-cp34m-win32.whl", hash = "sha256:0dd2adeb2e9de5081eb8dcec88874e7fd35dae9a21557be3a55a3c7d491842a4"},
-    {file = "h5py-2.9.0-cp34-cp34m-win_amd64.whl", hash = "sha256:b9e4b8dfd587365bdd719ae178fa1b6c1231f81280b1375eef8626dfd8761bf3"},
-    {file = "h5py-2.9.0-cp35-cp35m-macosx_10_6_intel.macosx_10_9_intel.macosx_10_9_x86_64.macosx_10_10_intel.macosx_10_10_x86_64.whl", hash = "sha256:082a27208aa3a2286e7272e998e7e225b2a7d4b7821bd840aebf96d50977abbb"},
-    {file = "h5py-2.9.0-cp35-cp35m-manylinux1_i686.whl", hash = "sha256:c5dd4ec75985b99166c045909e10f0534704d102848b1d9f0992720e908928e7"},
-    {file = "h5py-2.9.0-cp35-cp35m-manylinux1_x86_64.whl", hash = "sha256:8cc4aed71e20d87e0a6f02094d718a95252f11f8ed143bc112d22167f08d4040"},
-    {file = "h5py-2.9.0-cp35-cp35m-win32.whl", hash = "sha256:2cca17e80ddb151894333377675db90cd0279fa454776e0a4f74308376afd050"},
-    {file = "h5py-2.9.0-cp35-cp35m-win_amd64.whl", hash = "sha256:71b946d80ef3c3f12db157d7778b1fe74a517ca85e94809358b15580983c2ce2"},
-    {file = "h5py-2.9.0-cp36-cp36m-macosx_10_6_intel.macosx_10_9_intel.macosx_10_9_x86_64.macosx_10_10_intel.macosx_10_10_x86_64.whl", hash = "sha256:5fc7aba72a51b2c80605eba1c50dbf84224dcd206279d30a75c154e5652e1fe4"},
-    {file = "h5py-2.9.0-cp36-cp36m-manylinux1_i686.whl", hash = "sha256:d2b82f23cd862a9d05108fe99967e9edfa95c136f532a71cb3d28dc252771f50"},
-    {file = "h5py-2.9.0-cp36-cp36m-manylinux1_x86_64.whl", hash = "sha256:1e9fb6f1746500ea91a00193ce2361803c70c6b13f10aae9a33ad7b5bd28e800"},
-    {file = "h5py-2.9.0-cp36-cp36m-win32.whl", hash = "sha256:3c23d72058647cee19b30452acc7895621e2de0a0bd5b8a1e34204b9ea9ed43c"},
-    {file = "h5py-2.9.0-cp36-cp36m-win_amd64.whl", hash = "sha256:a744e13b000f234cd5a5b2a1f95816b819027c57f385da54ad2b7da1adace2f3"},
-    {file = "h5py-2.9.0-cp37-cp37m-macosx_10_6_intel.macosx_10_9_intel.macosx_10_9_x86_64.macosx_10_10_intel.macosx_10_10_x86_64.whl", hash = "sha256:1854c4beff9961e477e133143c5e5e355dac0b3ebf19c52cf7cc1b1ef757703c"},
-    {file = "h5py-2.9.0-cp37-cp37m-manylinux1_i686.whl", hash = "sha256:08e2e8297195f9e813e894b6c63f79372582787795bba2014a2db6a2de95f713"},
-    {file = "h5py-2.9.0-cp37-cp37m-manylinux1_x86_64.whl", hash = "sha256:05750b91640273c69989c657eaac34b091abdd75efc8c4824c82aaf898a2da0a"},
-    {file = "h5py-2.9.0-cp37-cp37m-win32.whl", hash = "sha256:b087ee01396c4b34e9dc41e3a6a0442158206d383c19c7d0396d52067b17c1cb"},
-    {file = "h5py-2.9.0-cp37-cp37m-win_amd64.whl", hash = "sha256:b0f03af381d33306ce67d18275b61acb4ca111ced645381387a02c8a5ee1b796"},
-    {file = "h5py-2.9.0-cp38-cp38-manylinux1_x86_64.whl", hash = "sha256:effab36e7fcb1c1a7b9bf5c014fdce226a4a09e498e9590bc6f36b23120c9f3e"},
-    {file = "h5py-2.9.0.tar.gz", hash = "sha256:9d41ca62daf36d6b6515ab8765e4c8c4388ee18e2a665701fef2b41563821002"},
+    {file = "h5py-2.10.0-cp27-cp27m-macosx_10_6_intel.whl", hash = "sha256:ecf4d0b56ee394a0984de15bceeb97cbe1fe485f1ac205121293fc44dcf3f31f"},
+    {file = "h5py-2.10.0-cp27-cp27m-manylinux1_i686.whl", hash = "sha256:86868dc07b9cc8cb7627372a2e6636cdc7a53b7e2854ad020c9e9d8a4d3fd0f5"},
+    {file = "h5py-2.10.0-cp27-cp27m-manylinux1_x86_64.whl", hash = "sha256:aac4b57097ac29089f179bbc2a6e14102dd210618e94d77ee4831c65f82f17c0"},
+    {file = "h5py-2.10.0-cp27-cp27m-win32.whl", hash = "sha256:7be5754a159236e95bd196419485343e2b5875e806fe68919e087b6351f40a70"},
+    {file = "h5py-2.10.0-cp27-cp27m-win_amd64.whl", hash = "sha256:13c87efa24768a5e24e360a40e0bc4c49bcb7ce1bb13a3a7f9902cec302ccd36"},
+    {file = "h5py-2.10.0-cp27-cp27mu-manylinux1_i686.whl", hash = "sha256:79b23f47c6524d61f899254f5cd5e486e19868f1823298bc0c29d345c2447172"},
+    {file = "h5py-2.10.0-cp27-cp27mu-manylinux1_x86_64.whl", hash = "sha256:cbf28ae4b5af0f05aa6e7551cee304f1d317dbed1eb7ac1d827cee2f1ef97a99"},
+    {file = "h5py-2.10.0-cp34-cp34m-manylinux1_i686.whl", hash = "sha256:c0d4b04bbf96c47b6d360cd06939e72def512b20a18a8547fa4af810258355d5"},
+    {file = "h5py-2.10.0-cp34-cp34m-manylinux1_x86_64.whl", hash = "sha256:549ad124df27c056b2e255ea1c44d30fb7a17d17676d03096ad5cd85edb32dc1"},
+    {file = "h5py-2.10.0-cp35-cp35m-macosx_10_6_intel.whl", hash = "sha256:a5f82cd4938ff8761d9760af3274acf55afc3c91c649c50ab18fcff5510a14a5"},
+    {file = "h5py-2.10.0-cp35-cp35m-manylinux1_i686.whl", hash = "sha256:3dad1730b6470fad853ef56d755d06bb916ee68a3d8272b3bab0c1ddf83bb99e"},
+    {file = "h5py-2.10.0-cp35-cp35m-manylinux1_x86_64.whl", hash = "sha256:063947eaed5f271679ed4ffa36bb96f57bc14f44dd4336a827d9a02702e6ce6b"},
+    {file = "h5py-2.10.0-cp35-cp35m-win32.whl", hash = "sha256:c54a2c0dd4957776ace7f95879d81582298c5daf89e77fb8bee7378f132951de"},
+    {file = "h5py-2.10.0-cp35-cp35m-win_amd64.whl", hash = "sha256:6998be619c695910cb0effe5eb15d3a511d3d1a5d217d4bd0bebad1151ec2262"},
+    {file = "h5py-2.10.0-cp36-cp36m-macosx_10_6_intel.whl", hash = "sha256:ff7d241f866b718e4584fa95f520cb19405220c501bd3a53ee11871ba5166ea2"},
+    {file = "h5py-2.10.0-cp36-cp36m-manylinux1_i686.whl", hash = "sha256:54817b696e87eb9e403e42643305f142cd8b940fe9b3b490bbf98c3b8a894cf4"},
+    {file = "h5py-2.10.0-cp36-cp36m-manylinux1_x86_64.whl", hash = "sha256:d3c59549f90a891691991c17f8e58c8544060fdf3ccdea267100fa5f561ff62f"},
+    {file = "h5py-2.10.0-cp36-cp36m-win32.whl", hash = "sha256:d7ae7a0576b06cb8e8a1c265a8bc4b73d05fdee6429bffc9a26a6eb531e79d72"},
+    {file = "h5py-2.10.0-cp36-cp36m-win_amd64.whl", hash = "sha256:bffbc48331b4a801d2f4b7dac8a72609f0b10e6e516e5c480a3e3241e091c878"},
+    {file = "h5py-2.10.0-cp37-cp37m-macosx_10_6_intel.whl", hash = "sha256:51ae56894c6c93159086ffa2c94b5b3388c0400548ab26555c143e7cfa05b8e5"},
+    {file = "h5py-2.10.0-cp37-cp37m-manylinux1_i686.whl", hash = "sha256:16ead3c57141101e3296ebeed79c9c143c32bdd0e82a61a2fc67e8e6d493e9d1"},
+    {file = "h5py-2.10.0-cp37-cp37m-manylinux1_x86_64.whl", hash = "sha256:f0e25bb91e7a02efccb50aba6591d3fe2c725479e34769802fcdd4076abfa917"},
+    {file = "h5py-2.10.0-cp37-cp37m-win32.whl", hash = "sha256:f23951a53d18398ef1344c186fb04b26163ca6ce449ebd23404b153fd111ded9"},
+    {file = "h5py-2.10.0-cp37-cp37m-win_amd64.whl", hash = "sha256:8bb1d2de101f39743f91512a9750fb6c351c032e5cd3204b4487383e34da7f75"},
+    {file = "h5py-2.10.0-cp38-cp38-macosx_10_9_x86_64.whl", hash = "sha256:64f74da4a1dd0d2042e7d04cf8294e04ddad686f8eba9bb79e517ae582f6668d"},
+    {file = "h5py-2.10.0-cp38-cp38-manylinux1_x86_64.whl", hash = "sha256:d35f7a3a6cefec82bfdad2785e78359a0e6a5fbb3f605dd5623ce88082ccd681"},
+    {file = "h5py-2.10.0-cp38-cp38-win32.whl", hash = "sha256:6ef7ab1089e3ef53ca099038f3c0a94d03e3560e6aff0e9d6c64c55fb13fc681"},
+    {file = "h5py-2.10.0-cp38-cp38-win_amd64.whl", hash = "sha256:769e141512b54dee14ec76ed354fcacfc7d97fea5a7646b709f7400cf1838630"},
+    {file = "h5py-2.10.0.tar.gz", hash = "sha256:84412798925dc870ffd7107f045d7659e60f5d46d1c70c700375248bf6bf512d"},
 ]
 humanfriendly = [
     {file = "humanfriendly-8.2-py2.py3-none-any.whl", hash = "sha256:e78960b31198511f45fd455534ae7645a6207d33e512d2e842c766d15d9c8080"},
@@ -2513,8 +2521,8 @@ jmespath = [
     {file = "jmespath-0.10.0.tar.gz", hash = "sha256:b85d0567b8666149a93172712e68920734333c0ce7e89b78b3e987f71e5ed4f9"},
 ]
 joblib = [
-    {file = "joblib-0.16.0-py3-none-any.whl", hash = "sha256:d348c5d4ae31496b2aa060d6d9b787864dd204f9480baaa52d18850cb43e9f49"},
-    {file = "joblib-0.16.0.tar.gz", hash = "sha256:8f52bf24c64b608bf0b2563e0e47d6fcf516abc8cfafe10cfd98ad66d94f92d6"},
+    {file = "joblib-0.17.0-py3-none-any.whl", hash = "sha256:698c311779f347cf6b7e6b8a39bb682277b8ee4aba8cf9507bc0cf4cd4737b72"},
+    {file = "joblib-0.17.0.tar.gz", hash = "sha256:9e284edd6be6b71883a63c9b7f124738a3c16195513ad940eae7e3438de885d5"},
 ]
 jsonschema = [
     {file = "jsonschema-3.2.0-py2.py3-none-any.whl", hash = "sha256:4e5b3cf8216f577bee9ce139cbe72eca3ea4f292ec60928ff24758ce626cd163"},
@@ -2529,8 +2537,8 @@ jupyter-core = [
     {file = "jupyter_core-4.6.3.tar.gz", hash = "sha256:394fd5dd787e7c8861741880bdf8a00ce39f95de5d18e579c74b882522219e7e"},
 ]
 jupyterlab-pygments = [
-    {file = "jupyterlab_pygments-0.1.1-py2.py3-none-any.whl", hash = "sha256:c9535e5999f29bff90bd0fa423717dcaf247b71fad505d66b17d3217e9021fc5"},
-    {file = "jupyterlab_pygments-0.1.1.tar.gz", hash = "sha256:19a0ccde7daddec638363cd3d60b63a4f6544c9181d65253317b2fb492a797b9"},
+    {file = "jupyterlab_pygments-0.1.2-py2.py3-none-any.whl", hash = "sha256:abfb880fd1561987efaefcb2d2ac75145d2a5d0139b1876d5be806e32f630008"},
+    {file = "jupyterlab_pygments-0.1.2.tar.gz", hash = "sha256:cfcda0873626150932f438eccf0f8bf22bfa92345b814890ab360d666b254146"},
 ]
 kaldiio = [
     {file = "kaldiio-2.17.0.tar.gz", hash = "sha256:02e4f153bae29bce62eee7e2c898292cbd04c85697a996963f6b2e9bbec8b5ef"},
@@ -2578,8 +2586,8 @@ llvmlite = [
     {file = "llvmlite-0.34.0.tar.gz", hash = "sha256:f03ee0d19bca8f2fe922bb424a909d05c28411983b0c2bc58b020032a0d11f63"},
 ]
 markdown = [
-    {file = "Markdown-3.2.2-py3-none-any.whl", hash = "sha256:c467cd6233885534bf0fe96e62e3cf46cfc1605112356c4f9981512b8174de59"},
-    {file = "Markdown-3.2.2.tar.gz", hash = "sha256:1fafe3f1ecabfb514a5285fca634a53c1b32a81cb0feb154264d55bf2ff22c17"},
+    {file = "Markdown-3.3-py3-none-any.whl", hash = "sha256:fbb1ba54ca41e8991dc5a561d9c6f752f5e4546f8750e56413ea50f2385761d3"},
+    {file = "Markdown-3.3.tar.gz", hash = "sha256:4f4172a4e989b97f96860fa434b89895069c576e2b537c4b4eed265266a7affc"},
 ]
 markupsafe = [
     {file = "MarkupSafe-1.1.1-cp27-cp27m-macosx_10_6_intel.whl", hash = "sha256:09027a7803a62ca78792ad89403b1b7a73a01c8cb65909cd876f7fcebd79b161"},
@@ -2659,16 +2667,16 @@ nbclient = [
     {file = "nbclient-0.5.0.tar.gz", hash = "sha256:8ad52d27ba144fca1402db014857e53c5a864a2f407be66ca9d74c3a56d6591d"},
 ]
 nbconvert = [
-    {file = "nbconvert-6.0.6-py3-none-any.whl", hash = "sha256:d8549f62e739a4d51f275c2932b1783ee5039dde07a2b71de70c0296a42c8394"},
-    {file = "nbconvert-6.0.6.tar.gz", hash = "sha256:68335477288aab8a9b9ec03002dce59b4eb1ca967116741ec218a4e78c129efd"},
+    {file = "nbconvert-6.0.7-py3-none-any.whl", hash = "sha256:39e9f977920b203baea0be67eea59f7b37a761caa542abe80f5897ce3cf6311d"},
+    {file = "nbconvert-6.0.7.tar.gz", hash = "sha256:cbbc13a86dfbd4d1b5dee106539de0795b4db156c894c2c5dc382062bbc29002"},
 ]
 nbformat = [
     {file = "nbformat-5.0.7-py3-none-any.whl", hash = "sha256:ea55c9b817855e2dfcd3f66d74857342612a60b1f09653440f4a5845e6e3523f"},
     {file = "nbformat-5.0.7.tar.gz", hash = "sha256:54d4d6354835a936bad7e8182dcd003ca3dc0cedfee5a306090e04854343b340"},
 ]
 nest-asyncio = [
-    {file = "nest_asyncio-1.4.0-py3-none-any.whl", hash = "sha256:ea51120725212ef02e5870dd77fc67ba7343fc945e3b9a7ff93384436e043b6a"},
-    {file = "nest_asyncio-1.4.0.tar.gz", hash = "sha256:5773054bbc14579b000236f85bc01ecced7ffd045ec8ca4a9809371ec65a59c8"},
+    {file = "nest_asyncio-1.4.1-py3-none-any.whl", hash = "sha256:a4487c4f49f2d11a7bb89a512a6886b6a5045f47097f49815b2851aaa8599cf0"},
+    {file = "nest_asyncio-1.4.1.tar.gz", hash = "sha256:b86c3193abda5b2eeccf8c79894bc71c680369a178f4b068514ac00720b14e01"},
 ]
 nltk = [
     {file = "nltk-3.5.zip", hash = "sha256:845365449cd8c5f9731f7cb9f8bd6fd0767553b9d53af9eb1b3abf7700936b35"},
@@ -2925,8 +2933,8 @@ pyparsing = [
     {file = "pyparsing-2.4.7.tar.gz", hash = "sha256:c203ec8783bf771a155b207279b9bccb8dea02d8f0c9e5f8ead507bc3246ecc1"},
 ]
 pypinyin = [
-    {file = "pypinyin-0.39.0-py2.py3-none-any.whl", hash = "sha256:f0ff68b0825b5591f472e212461d2a166a43a4123520e6483874b0c4f3578688"},
-    {file = "pypinyin-0.39.0.tar.gz", hash = "sha256:b219b2f0d634272c5971f7068343b6801f8c78433b5438dcfd4fbffc3314aef6"},
+    {file = "pypinyin-0.39.1-py2.py3-none-any.whl", hash = "sha256:3273509f36a8cc6ec23555014dd838a27273f2fc25f849b6182f5a7f2055bca8"},
+    {file = "pypinyin-0.39.1.tar.gz", hash = "sha256:3fac6c2c018f6ba62f5128a0e77a7d01cd4e1b7a96410102344e6fe73bcd0666"},
 ]
 pyreadline = [
     {file = "pyreadline-2.1.win-amd64.exe", hash = "sha256:9ce5fa65b8992dfa373bddc5b6e0864ead8f291c94fbfec05fbd5c836162e67b"},
@@ -3045,27 +3053,33 @@ pyzmq = [
     {file = "pyzmq-19.0.2.tar.gz", hash = "sha256:296540a065c8c21b26d63e3cea2d1d57902373b16e4256afe46422691903a438"},
 ]
 regex = [
-    {file = "regex-2020.9.27-cp27-cp27m-win32.whl", hash = "sha256:d23a18037313714fb3bb5a94434d3151ee4300bae631894b1ac08111abeaa4a3"},
-    {file = "regex-2020.9.27-cp27-cp27m-win_amd64.whl", hash = "sha256:84e9407db1b2eb368b7ecc283121b5e592c9aaedbe8c78b1a2f1102eb2e21d19"},
-    {file = "regex-2020.9.27-cp36-cp36m-manylinux1_i686.whl", hash = "sha256:5f18875ac23d9aa2f060838e8b79093e8bb2313dbaaa9f54c6d8e52a5df097be"},
-    {file = "regex-2020.9.27-cp36-cp36m-manylinux1_x86_64.whl", hash = "sha256:ae91972f8ac958039920ef6e8769277c084971a142ce2b660691793ae44aae6b"},
-    {file = "regex-2020.9.27-cp36-cp36m-manylinux2010_i686.whl", hash = "sha256:9a02d0ae31d35e1ec12a4ea4d4cca990800f66a917d0fb997b20fbc13f5321fc"},
-    {file = "regex-2020.9.27-cp36-cp36m-manylinux2010_x86_64.whl", hash = "sha256:ebbe29186a3d9b0c591e71b7393f1ae08c83cb2d8e517d2a822b8f7ec99dfd8b"},
-    {file = "regex-2020.9.27-cp36-cp36m-win32.whl", hash = "sha256:4707f3695b34335afdfb09be3802c87fa0bc27030471dbc082f815f23688bc63"},
-    {file = "regex-2020.9.27-cp36-cp36m-win_amd64.whl", hash = "sha256:9bc13e0d20b97ffb07821aa3e113f9998e84994fe4d159ffa3d3a9d1b805043b"},
-    {file = "regex-2020.9.27-cp37-cp37m-manylinux1_i686.whl", hash = "sha256:f1b3afc574a3db3b25c89161059d857bd4909a1269b0b3cb3c904677c8c4a3f7"},
-    {file = "regex-2020.9.27-cp37-cp37m-manylinux1_x86_64.whl", hash = "sha256:5533a959a1748a5c042a6da71fe9267a908e21eded7a4f373efd23a2cbdb0ecc"},
-    {file = "regex-2020.9.27-cp37-cp37m-manylinux2010_i686.whl", hash = "sha256:1fe0a41437bbd06063aa184c34804efa886bcc128222e9916310c92cd54c3b4c"},
-    {file = "regex-2020.9.27-cp37-cp37m-manylinux2010_x86_64.whl", hash = "sha256:c570f6fa14b9c4c8a4924aaad354652366577b4f98213cf76305067144f7b100"},
-    {file = "regex-2020.9.27-cp37-cp37m-win32.whl", hash = "sha256:eda4771e0ace7f67f58bc5b560e27fb20f32a148cbc993b0c3835970935c2707"},
-    {file = "regex-2020.9.27-cp37-cp37m-win_amd64.whl", hash = "sha256:60b0e9e6dc45683e569ec37c55ac20c582973841927a85f2d8a7d20ee80216ab"},
-    {file = "regex-2020.9.27-cp38-cp38-manylinux1_i686.whl", hash = "sha256:088afc8c63e7bd187a3c70a94b9e50ab3f17e1d3f52a32750b5b77dbe99ef5ef"},
-    {file = "regex-2020.9.27-cp38-cp38-manylinux1_x86_64.whl", hash = "sha256:eaf548d117b6737df379fdd53bdde4f08870e66d7ea653e230477f071f861121"},
-    {file = "regex-2020.9.27-cp38-cp38-manylinux2010_i686.whl", hash = "sha256:41bb65f54bba392643557e617316d0d899ed5b4946dccee1cb6696152b29844b"},
-    {file = "regex-2020.9.27-cp38-cp38-manylinux2010_x86_64.whl", hash = "sha256:8d69cef61fa50c8133382e61fd97439de1ae623fe943578e477e76a9d9471637"},
-    {file = "regex-2020.9.27-cp38-cp38-win32.whl", hash = "sha256:f2388013e68e750eaa16ccbea62d4130180c26abb1d8e5d584b9baf69672b30f"},
-    {file = "regex-2020.9.27-cp38-cp38-win_amd64.whl", hash = "sha256:4318d56bccfe7d43e5addb272406ade7a2274da4b70eb15922a071c58ab0108c"},
-    {file = "regex-2020.9.27.tar.gz", hash = "sha256:a6f32aea4260dfe0e55dc9733ea162ea38f0ea86aa7d0f77b15beac5bf7b369d"},
+    {file = "regex-2020.10.11-cp27-cp27m-win32.whl", hash = "sha256:4f5c0fe46fb79a7adf766b365cae56cafbf352c27358fda811e4a1dc8216d0db"},
+    {file = "regex-2020.10.11-cp27-cp27m-win_amd64.whl", hash = "sha256:39a5ef30bca911f5a8a3d4476f5713ed4d66e313d9fb6755b32bec8a2e519635"},
+    {file = "regex-2020.10.11-cp36-cp36m-manylinux1_i686.whl", hash = "sha256:7c4fc5a8ec91a2254bb459db27dbd9e16bba1dabff638f425d736888d34aaefa"},
+    {file = "regex-2020.10.11-cp36-cp36m-manylinux1_x86_64.whl", hash = "sha256:d537e270b3e6bfaea4f49eaf267984bfb3628c86670e9ad2a257358d3b8f0955"},
+    {file = "regex-2020.10.11-cp36-cp36m-manylinux2010_i686.whl", hash = "sha256:a8240df4957a5b0e641998a5d78b3c4ea762c845d8cb8997bf820626826fde9a"},
+    {file = "regex-2020.10.11-cp36-cp36m-manylinux2010_x86_64.whl", hash = "sha256:4302153abb96859beb2c778cc4662607a34175065fc2f33a21f49eb3fbd1ccd3"},
+    {file = "regex-2020.10.11-cp36-cp36m-win32.whl", hash = "sha256:c077c9d04a040dba001cf62b3aff08fd85be86bccf2c51a770c77377662a2d55"},
+    {file = "regex-2020.10.11-cp36-cp36m-win_amd64.whl", hash = "sha256:46ab6070b0d2cb85700b8863b3f5504c7f75d8af44289e9562195fe02a8dd72d"},
+    {file = "regex-2020.10.11-cp37-cp37m-manylinux1_i686.whl", hash = "sha256:d629d750ebe75a88184db98f759633b0a7772c2e6f4da529f0027b4a402c0e2f"},
+    {file = "regex-2020.10.11-cp37-cp37m-manylinux1_x86_64.whl", hash = "sha256:8e7ef296b84d44425760fe813cabd7afbb48c8dd62023018b338bbd9d7d6f2f0"},
+    {file = "regex-2020.10.11-cp37-cp37m-manylinux2010_i686.whl", hash = "sha256:e490f08897cb44e54bddf5c6e27deca9b58c4076849f32aaa7a0b9f1730f2c20"},
+    {file = "regex-2020.10.11-cp37-cp37m-manylinux2010_x86_64.whl", hash = "sha256:850339226aa4fec04916386577674bb9d69abe0048f5d1a99f91b0004bfdcc01"},
+    {file = "regex-2020.10.11-cp37-cp37m-win32.whl", hash = "sha256:60c4f64d9a326fe48e8738c3dbc068e1edc41ff7895a9e3723840deec4bc1c28"},
+    {file = "regex-2020.10.11-cp37-cp37m-win_amd64.whl", hash = "sha256:8ba3efdd60bfee1aa784dbcea175eb442d059b576934c9d099e381e5a9f48930"},
+    {file = "regex-2020.10.11-cp38-cp38-manylinux1_i686.whl", hash = "sha256:2308491b3e6c530a3bb38a8a4bb1dc5fd32cbf1e11ca623f2172ba17a81acef1"},
+    {file = "regex-2020.10.11-cp38-cp38-manylinux1_x86_64.whl", hash = "sha256:b8806649983a1c78874ec7e04393ef076805740f6319e87a56f91f1767960212"},
+    {file = "regex-2020.10.11-cp38-cp38-manylinux2010_i686.whl", hash = "sha256:a2a31ee8a354fa3036d12804730e1e20d58bc4e250365ead34b9c30bbe9908c3"},
+    {file = "regex-2020.10.11-cp38-cp38-manylinux2010_x86_64.whl", hash = "sha256:d9d53518eeed12190744d366ec4a3f39b99d7daa705abca95f87dd8b442df4ad"},
+    {file = "regex-2020.10.11-cp38-cp38-win32.whl", hash = "sha256:3d5a8d007116021cf65355ada47bf405656c4b3b9a988493d26688275fde1f1c"},
+    {file = "regex-2020.10.11-cp38-cp38-win_amd64.whl", hash = "sha256:f579caecbbca291b0fcc7d473664c8c08635da2f9b1567c22ea32311c86ef68c"},
+    {file = "regex-2020.10.11-cp39-cp39-manylinux1_i686.whl", hash = "sha256:8c8c42aa5d3ac9a49829c4b28a81bebfa0378996f9e0ca5b5ab8a36870c3e5ee"},
+    {file = "regex-2020.10.11-cp39-cp39-manylinux1_x86_64.whl", hash = "sha256:c529ba90c1775697a65b46c83d47a2d3de70f24d96da5d41d05a761c73b063af"},
+    {file = "regex-2020.10.11-cp39-cp39-manylinux2010_i686.whl", hash = "sha256:6cf527ec2f3565248408b61dd36e380d799c2a1047eab04e13a2b0c15dd9c767"},
+    {file = "regex-2020.10.11-cp39-cp39-manylinux2010_x86_64.whl", hash = "sha256:671c51d352cfb146e48baee82b1ee8d6ffe357c292f5e13300cdc5c00867ebfc"},
+    {file = "regex-2020.10.11-cp39-cp39-win32.whl", hash = "sha256:a63907332531a499b8cdfd18953febb5a4c525e9e7ca4ac147423b917244b260"},
+    {file = "regex-2020.10.11-cp39-cp39-win_amd64.whl", hash = "sha256:1a16afbfadaadc1397353f9b32e19a65dc1d1804c80ad73a14f435348ca017ad"},
+    {file = "regex-2020.10.11.tar.gz", hash = "sha256:463e770c48da76a8da82b8d4a48a541f314e0df91cbb6d873a341dbe578efafd"},
 ]
 requests = [
     {file = "requests-2.24.0-py2.py3-none-any.whl", hash = "sha256:fe75cc94a9443b9246fc7049224f75604b113c36acb93f87b80ed42c44cbb898"},
@@ -3219,7 +3233,7 @@ stempeg = [
     {file = "stempeg-0.1.8.tar.gz", hash = "sha256:f2266ad32d4e4ff3a936279b62a48ba58e6ada32f0e5ee53f4968877c0148136"},
 ]
 streamlit = [
-    {file = "streamlit-0.66.0-py2.py3-none-any.whl", hash = "sha256:383f16b6e84eebe9f99e1da5d3fae914874a44f797176b67ef7e34ad214fd005"},
+    {file = "streamlit-0.68.0-py2.py3-none-any.whl", hash = "sha256:c180c7f2e0fe4d29debd01c25999dc76b3336f5adc81f46614e6b0fccf95195c"},
 ]
 tensorboard = [
     {file = "tensorboard-2.3.0-py3-none-any.whl", hash = "sha256:d34609ed83ff01dd5b49ef81031cfc9c166bba0dabd60197024f14df5e8eae5e"},
@@ -3280,8 +3294,8 @@ tornado = [
     {file = "tornado-6.0.4.tar.gz", hash = "sha256:0fe2d45ba43b00a41cd73f8be321a44936dc1aba233dee979f17a042b83eb6dc"},
 ]
 tqdm = [
-    {file = "tqdm-4.49.0-py2.py3-none-any.whl", hash = "sha256:8f3c5815e3b5e20bc40463fa6b42a352178859692a68ffaa469706e6d38342a5"},
-    {file = "tqdm-4.49.0.tar.gz", hash = "sha256:faf9c671bd3fad5ebaeee366949d969dca2b2be32c872a7092a1e1a9048d105b"},
+    {file = "tqdm-4.50.2-py2.py3-none-any.whl", hash = "sha256:43ca183da3367578ebf2f1c2e3111d51ea161ed1dc4e6345b86e27c2a93beff7"},
+    {file = "tqdm-4.50.2.tar.gz", hash = "sha256:69dfa6714dee976e2425a9aab84b622675b7b1742873041e3db8a8e86132a4af"},
 ]
 traitlets = [
     {file = "traitlets-4.3.3-py2.py3-none-any.whl", hash = "sha256:70b4c6a1d9019d7b4f6846832288f86998aa3b9207c6821f3578a6a6a467fe44"},
@@ -3331,6 +3345,6 @@ widgetsnbextension = [
     {file = "widgetsnbextension-3.5.1.tar.gz", hash = "sha256:079f87d87270bce047512400efd70238820751a11d2d8cb137a5a5bdbaf255c7"},
 ]
 zipp = [
-    {file = "zipp-3.2.0-py3-none-any.whl", hash = "sha256:43f4fa8d8bb313e65d8323a3952ef8756bf40f9a5c3ea7334be23ee4ec8278b6"},
-    {file = "zipp-3.2.0.tar.gz", hash = "sha256:b52f22895f4cfce194bc8172f3819ee8de7540aa6d873535a8668b730b8b411f"},
+    {file = "zipp-3.3.0-py3-none-any.whl", hash = "sha256:eed8ec0b8d1416b2ca33516a37a08892442f3954dee131e92cfd92d8fe3e7066"},
+    {file = "zipp-3.3.0.tar.gz", hash = "sha256:64ad89efee774d1897a58607895d80789c59778ea02185dd846ac38394a8642b"},
 ]

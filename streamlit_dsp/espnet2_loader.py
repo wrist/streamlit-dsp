@@ -81,7 +81,8 @@ def main():
             st.audio(fp.name)
             st.line_chart(speech)
 
-            ret = st.button("decode")
+            #ret = st.button("decode")
+            ret = True  # due to a bug that uploaded file broken on reload, always decode
             if ret:
                 nbests = speech2text(speech)
                 st.write("### result")
