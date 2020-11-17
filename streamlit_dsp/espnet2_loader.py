@@ -15,47 +15,21 @@ import soundfile as sf
 
 import yaml
 
+import time
 import contextlib
-from functools import wraps
+
+from concurrent.futures import ThreadPoolExecutor
 from io import StringIO
 
 from espnet_model_zoo.downloader import ModelDownloader
 from espnet2.bin.asr_inference import Speech2Text
 
 
-# https://github.com/streamlit/streamlit/issues/268
-def capture_output(func):
-    """Capture output from running a function and write using streamlit."""
-
-    @wraps(func)
-    def wrapper(*args, **kwargs):
-        # Redirect output to string buffers
-        stdout, stderr = StringIO(), StringIO()
-        try:
-            with contextlib.redirect_stdout(stdout), contextlib.redirect_stderr(stderr):
-                return func(*args, **kwargs)
-        except Exception as err:
-            st.write(f"Failure while executing: {err}")
-        finally:
-            _stdout = stdout.getvalue()
-            if _stdout:
-                st.write("Execution stdout:")
-                st.code(_stdout)
-
-            _stderr = stderr.getvalue()
-            if _stderr:
-                st.write("Execution stderr:")
-                st.code(_stderr)
-
-    return wrapper
-
-
-def download_model(model_name):
+def thread_func(model_name: str, sio: StringIO):
     d = ModelDownloader()
-    st.write("Model downloading...")
-
-    downloader_wrapper = capture_output(d.download_and_unpack)
-    model_dict = downloader_wrapper(model_name)
+    #with contextlib.redirect_stdout(sio):
+    with contextlib.redirect_stderr(sio):
+        model_dict = d.download_and_unpack(model_name)
 
     speech2text = Speech2Text(**model_dict)
     return speech2text, model_dict
@@ -66,7 +40,27 @@ def main():
     st.sidebar.write('see [model names](https://github.com/espnet/espnet_model_zoo/blob/master/espnet_model_zoo/table.csv)')
 
     if model_name:
-        speech2text, model_dict = download_model(model_name)
+        shared_sio = StringIO()
+
+        with ThreadPoolExecutor() as executor:
+            st.write("Model downloading...")
+            future = executor.submit(thread_func, model_name, shared_sio)
+
+            # observe shared_sio
+            placeholder = st.empty()
+            while future.running():
+                placeholder.empty()
+                sio_str = shared_sio.getvalue()
+                last_line = sio_str.split('\r')[-1]
+                placeholder.write(last_line)
+                time.sleep(1)
+
+            placeholder.empty()
+            sio_str = shared_sio.getvalue()
+            last_line = sio_str.split('\r')[-1]
+            placeholder.write(last_line)
+
+            speech2text, model_dict = future.result()
 
         st.write("## Upload and decode")
         wav = st.file_uploader("wav", type=["wav", "flac"], encoding=None)
